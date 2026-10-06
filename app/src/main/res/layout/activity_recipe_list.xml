@@ -8,38 +8,37 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/tvSuggestedTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Suggested Recipes"
+        android:text="Recipes"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/tvSuggestedDescription"
+    <EditText
+        android:id="@+id/etSearchRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recipes you can make with the ingredients in your pantry."
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginBottom="16dp" />
+        android:hint="Search recipes..."
+        android:inputType="text"
+        android:padding="12dp" />
 
     <TextView
-        android:id="@+id/tvSuggestedEmpty"
+        android:id="@+id/tvEmptyRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No suggested recipes yet."
+        android:text="No recipes found."
         android:textSize="16sp"
         android:gravity="center"
         android:padding="24dp"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerSuggestedRecipes"
+        android:id="@+id/recyclerRecipes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_marginTop="12dp" />
 
 </LinearLayout>

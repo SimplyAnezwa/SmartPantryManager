@@ -6,33 +6,63 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.smartpantrymanager.database.RecipeSeeder;
 
-    private Button btnPantry;
-    private Button btnRecipes;
-    private Button btnSettings;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnPantry = findViewById(R.id.btnPantry);
-        btnRecipes = findViewById(R.id.btnRecipes);
-        btnSettings = findViewById(R.id.btnSettings);
+        // Seed starter recipes into the database
+        RecipeSeeder recipeSeeder = new RecipeSeeder(this);
+        recipeSeeder.seedRecipes();
+
+        // My Pantry
+        Button btnPantry = findViewById(R.id.btnPantry);
 
         btnPantry.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PantryListActivity.class);
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    PantryListActivity.class
+            );
             startActivity(intent);
         });
 
-        btnRecipes.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SuggestedRecipesActivity.class);
+        // Suggested Recipes
+        Button btnSuggestedRecipes =
+                findViewById(R.id.btnSuggestedRecipes);
+
+        btnSuggestedRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SuggestedRecipesActivity.class
+            );
             startActivity(intent);
         });
+
+        // View Recipes
+        Button btnViewRecipes =
+                findViewById(R.id.btnViewRecipes);
+
+        btnViewRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    RecipeListActivity.class
+            );
+            startActivity(intent);
+        });
+
+        // Settings
+        Button btnSettings =
+                findViewById(R.id.btnSettings);
 
         btnSettings.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SettingsActivity.class
+            );
             startActivity(intent);
         });
     }
