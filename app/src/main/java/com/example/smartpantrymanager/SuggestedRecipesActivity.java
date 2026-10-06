@@ -152,9 +152,9 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
             boolean ingredientAvailable = false;
 
             String requiredName =
-                    required.getIngredientName()
-                            .trim()
-                            .toLowerCase(Locale.ROOT);
+                    normalizeIngredientName(
+                            required.getIngredientName()
+                    );
 
             double requiredQuantity =
                     required.getRequiredQuantity();
@@ -163,9 +163,9 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
                     pantryItems) {
 
                 String pantryName =
-                        pantryItem.getName()
-                                .trim()
-                                .toLowerCase(Locale.ROOT);
+                        normalizeIngredientName(
+                                pantryItem.getName()
+                        );
 
                 if (pantryName.equals(requiredName)) {
 
@@ -188,5 +188,56 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private String normalizeIngredientName(String ingredientName) {
+
+        if (ingredientName == null) {
+            return "";
+        }
+
+        String name = ingredientName
+                .trim()
+                .toLowerCase(Locale.ROOT);
+
+        // Remove extra spaces
+        name = name.replaceAll("\\s+", " ");
+
+        // Handle common singular/plural variations
+        if (name.endsWith("ies")
+                && name.length() > 3) {
+
+            name = name.substring(
+                    0,
+                    name.length() - 3
+            ) + "y";
+
+        } else if (name.endsWith("oes")
+                && name.length() > 3) {
+
+            name = name.substring(
+                    0,
+                    name.length() - 2
+            );
+
+        } else if (name.endsWith("es")
+                && name.length() > 3) {
+
+            name = name.substring(
+                    0,
+                    name.length() - 2
+            );
+
+        } else if (name.endsWith("s")
+                && !name.endsWith("ss")
+                && name.length() > 2) {
+
+            name = name.substring(
+                    0,
+                    name.length() - 1
+            );
+        }
+
+        return name;
     }
 }
